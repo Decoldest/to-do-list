@@ -1,7 +1,4 @@
-import { makeToDo } from './toDos.js';
-
+import { addToProjects, getProjects } from './projects.js';
 console.log("hello");
 
-let temp = makeToDo('title', 'description', 'dueDate', 'priority', 'notes', 'checklist');
-
-console.log(temp);
+console.log(getProjects());
