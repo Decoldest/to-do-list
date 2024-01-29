@@ -1,0 +1,1 @@
+(()=>{"use strict";class t{constructor(t,i,e,s,o,c){this.title=t,this.description=i,this.dueDate=e,this.priority=s,this.notes=o,this.checklist=c}getData(){return{title:this.title,description:this.description,dueDate,priority,notes,checklist}}}console.log("hello");let i=new t("title","description","dueDate","priority","notes","checklist");console.log(i)})();
