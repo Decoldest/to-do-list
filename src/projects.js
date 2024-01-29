@@ -1,5 +1,3 @@
-import { makeToDo } from './toDos.js';
-
 const projects = {
   'inbox': [],
 }
@@ -11,11 +9,7 @@ function getProjects() {
 function addToProjects(task, project) {
   projects[project] = projects[project] ?? [];
   projects[project].push(task);
+  console.log(task.getData());
 }
 
-addToProjects(makeToDo('title', 'description', 'dueDate', 'priority', 'notes'), 'Groceries');
-addToProjects(makeToDo('title', 'description', 'dueDate', 'priority', 'notes'), 'inbox');
-addToProjects(makeToDo('teetle', 'description', 'dueDate', 'priority', 'notes'), 'inbox');
-
-
-export { makeToDo, addToProjects, getProjects };
+export { addToProjects, getProjects };

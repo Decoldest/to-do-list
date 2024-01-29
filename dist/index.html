@@ -6,26 +6,26 @@
   <title>To Do List</title>
 </head>
 <body>
-  <form id="task-form" method="post">
+  <form id="task-form">
     <p>
-      <input type="text" name="title" id="title" placeholder="title" required>
+      <input type="text" name="title" id="title" placeholder="Title" required>
     </p>
     <p>
-      <input type="text" name="description" id="description" placeholder="description" required>
+      <input type="text" name="description" id="description" placeholder="Description">
     </p>
     <p>
-      <input type="date" name="duedate" id="duedate" placeholder="duedate" required>
+      <input type="date" name="duedate" id="duedate" placeholder="duedate">
     </p>
+    <label for="priority">Priority:</label>
     <select id="priority" name="priority">
-      <option value="critical">Critical</option>
-      <option value="high">High</option>
-      <option value="medium">Medium</option>
       <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      <option value="critical">Critical</option>
     </select>
-    <div class="done">
-      <label for="done">Done?</label>
-      <input type="checkbox" id="done" name="done"/>
-    </div>
+    <p>
+      <textarea id="notes" name="notes" rows="5" cols="20" placeholder="Notes..."></textarea>
+    </p>
     <p>
       <button type="submit" value="submit" id="modal-confirm">Confirm</button>
     </p>
