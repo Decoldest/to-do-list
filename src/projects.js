@@ -1,7 +1,7 @@
 import { makeToDo } from './toDos.js';
 
 const projects = {
-  'inbox': ['sfas', 'afafff'],
+  'inbox': [],
 }
 
 function getProjects() {
@@ -9,10 +9,13 @@ function getProjects() {
 }
 
 function addToProjects(task, project) {
-  projects[project] = [task];
+  projects[project] = projects[project] ?? [];
+  projects[project].push(task);
 }
 
-addToProjects(makeToDo('title', 'description', 'dueDate', 'priority', 'notes', 'checklist'), 'Groceries');
+addToProjects(makeToDo('title', 'description', 'dueDate', 'priority', 'notes'), 'Groceries');
+addToProjects(makeToDo('title', 'description', 'dueDate', 'priority', 'notes'), 'inbox');
+addToProjects(makeToDo('teetle', 'description', 'dueDate', 'priority', 'notes'), 'inbox');
 
 
-export { addToProjects, getProjects };
+export { makeToDo, addToProjects, getProjects };

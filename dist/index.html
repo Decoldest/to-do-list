@@ -6,7 +6,30 @@
   <title>To Do List</title>
 </head>
 <body>
-  This is my to do list
+  <form id="task-form" method="post">
+    <p>
+      <input type="text" name="title" id="title" placeholder="title" required>
+    </p>
+    <p>
+      <input type="text" name="description" id="description" placeholder="description" required>
+    </p>
+    <p>
+      <input type="date" name="duedate" id="duedate" placeholder="duedate" required>
+    </p>
+    <select id="priority" name="priority">
+      <option value="critical">Critical</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+    <div class="done">
+      <label for="done">Done?</label>
+      <input type="checkbox" id="done" name="done"/>
+    </div>
+    <p>
+      <button type="submit" value="submit" id="modal-confirm">Confirm</button>
+    </p>
+  </form>
   <script src="main.js"></script>
 </body>
 </html>

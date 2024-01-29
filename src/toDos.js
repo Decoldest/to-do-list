@@ -1,11 +1,10 @@
 class toDo {
-  constructor(title, description, dueDate, priority, notes, checklist) {
+  constructor(title, description, dueDate, priority, notes) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
-    this.checklist = checklist;
   }
   getData() {
     return { title:this.title, 
@@ -13,13 +12,12 @@ class toDo {
       dueDate:dueDate, 
       priority:priority, 
       notes:notes, 
-      checklist:checklist 
     };
   }
 }
 
-const makeToDo = (title, description, dueDate, priority, notes, checklist) => {
-  return new toDo(title, description, dueDate, priority, notes, checklist);
+const makeToDo = (title, description, dueDate, priority, notes) => {
+  return new toDo(title, description, dueDate, priority, notes);
 }
 
 export { makeToDo };
