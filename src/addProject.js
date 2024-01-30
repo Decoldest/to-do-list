@@ -1,25 +1,30 @@
-const projectInput = document.getElementById('project-input');
-const addProjectButton = document.getElementById('add');
-const cancelAddProject = document.getElementById('cancel');
+import { createNewProject } from './projects.js'
 
-function toggleProjectInput() {
+const projectInput = document.getElementById('project-input');
+const addProjectButton = document.getElementById('add-project');
+const cancelAddProject = document.getElementById('cancel-add-project');
+
+const toggleProjectInput = () => {
   projectInput.classList.toggle('show');
   addProjectButton.classList.toggle('show');
   cancelAddProject.classList.toggle('show');
-}
+};
 
-addProjectButton.addEventListener('click', () => {
-  let newProjectName = projectInput.value;
+const handleAddProjectClick = () => {
+  createNewProject(projectInput.value);
   resetNewProjectInput();
-});
+};
 
-cancelAddProject.addEventListener('click', () => {
+const handleCancelAddProjectClick = () => {
   resetNewProjectInput();
   toggleProjectInput();
-});
+};
 
 const resetNewProjectInput = () => {
   projectInput.value = '';
-}
+};
 
-export { toggleProjectInput }
+addProjectButton.addEventListener('click', handleAddProjectClick);
+cancelAddProject.addEventListener('click', handleCancelAddProjectClick);
+
+export { toggleProjectInput };

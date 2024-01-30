@@ -12,7 +12,7 @@ function addToProjects (task, project) {
   console.log(task.getData());
 }
 
-function createNewProject(name) {
+export function createNewProject(name) {
   if (!projects[name]) {
     projects[name] = [];
   }

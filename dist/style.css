@@ -1,19 +1,24 @@
 * {
   box-sizing: border-box;
 }
+
+#task-form {
+  border: 1px saddlebrown solid;
+}
+
 span {
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
 }
 
-#project-input, #add, #cancel {
+#project-input, #add-project, #cancel-add-project, #task-form{
   transform: translateX(-100%);
   opacity: 0;
   transition: opacity .25s, transform .25s;
 }
 
-#project-input.show , #add.show, #cancel.show{
+#project-input.show , #add-project.show, #cancel-add-project.show, #task-form.show{
   transform: translateX(0);
   opacity: 1;
 }
