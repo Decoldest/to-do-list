@@ -8,6 +8,7 @@ const projectsContainer = document.querySelector('.projects-container');
 
 let currentProject = 'inbox';
 
+//Allows new project input to slide in 
 const toggleProjectInput = () => {
   projectInput.classList.toggle('show');
   addProjectButton.classList.toggle('show');
@@ -16,11 +17,13 @@ const toggleProjectInput = () => {
 
 const handleAddProjectClick = () => {
   const projectName = projectInput.value;
+  //Prevent adding empty button
   if(!projectName) return;
 
   addToProjectArray(projectName);
   resetNewProjectInput();
   projectsContainer.appendChild(makeNewProjectButton(projectName));
+  toggleProjectInput();
 };
 
 const handleCancelAddProjectClick = () => {
@@ -42,10 +45,11 @@ const createButton = (name) => {
 const projectBarListener = (button) => {
   button.addEventListener('click', () => {
     currentProject = button.id;
-    console.log(currentProject);
+//    console.log(currentProject);
   });
 }
 
+//Creates a new project button for the project bar
 function makeNewProjectButton(name) {
   const newProjectButton = createButton(name);
   projectBarListener(newProjectButton);
@@ -61,4 +65,4 @@ const setNewProjectListener = () => {
   });
 };
 
-export { setNewProjectListener }
+export { setNewProjectListener, currentProject }
