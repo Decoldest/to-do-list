@@ -3,6 +3,7 @@
 }
 
 #task-form {
+  position: absolute;
   border: 1px saddlebrown solid;
 }
 
@@ -12,13 +13,43 @@ span {
   vertical-align: middle;
 }
 
-#project-input, #add-project, #cancel-add-project, #task-form{
+#project-input,
+#add-project, 
+#cancel-add-project, 
+#task-form
+{
   transform: translateX(-100%);
   opacity: 0;
   transition: opacity .25s, transform .25s;
 }
 
-#project-input.show , #add-project.show, #cancel-add-project.show, #task-form.show{
+#project-input.show, 
+#add-project.show, 
+#cancel-add-project.show
+{
   transform: translateX(0);
   opacity: 1;
+}
+
+#task-form.show {
+  transform: translateX(100%);
+  opacity: 1;
+}
+#title {
+  transition-delay: 0.2s; /* Delay for 0.2 seconds */
+}
+#description {
+  transition-delay: 0.4s; /* Delay for 0.4 seconds */
+}
+#duedate {
+  transition-delay: 0.6s; /* Delay for 0.6 seconds */
+}
+#priority {
+  transition-delay: 0.8s; /* Delay for 0.8 seconds */
+}
+#notes {
+  transition-delay: 1s; /* Delay for 1 second */
+}
+#modal-confirm {
+  transition-delay: 1.2s; /* Delay for 1.2 seconds */
 }

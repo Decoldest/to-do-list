@@ -1,10 +1,8 @@
 import { addToProjects, getProjects } from "./projects.js";
 import { makeToDo } from "./toDos.js";
-import { toggleProjectInput } from "./addProject.js";
-import { toggleTaskForm } from "./addToDos.js";
+import { setNewProjectListener } from "./addProject.js";
+import { setNewToDoListener } from "./addToDos.js";
 
-
-let currentProject = 'inbox';
 const buttons = Array.from(document.querySelectorAll('.current-project'));
 
 for (let button of buttons) {
@@ -12,9 +10,6 @@ for (let button of buttons) {
     currentProject = button.id;
   });
 }
-
-document.getElementById('new-project').onclick = toggleProjectInput;
-document.getElementById('new-to-do').onclick = toggleTaskForm;
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
@@ -41,3 +36,5 @@ function setAddTaskConfirm() {
 }
 
 setAddTaskConfirm();
+setNewToDoListener();
+setNewProjectListener();
