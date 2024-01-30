@@ -3,13 +3,6 @@ import { makeToDo } from "./toDos.js";
 import { setNewProjectListener } from "./addProject.js";
 import { setNewToDoListener } from "./addToDos.js";
 
-const buttons = Array.from(document.querySelectorAll('.current-project'));
-
-for (let button of buttons) {
-  button.addEventListener('click', () => {
-    currentProject = button.id;
-  });
-}
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));

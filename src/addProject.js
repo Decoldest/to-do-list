@@ -16,6 +16,8 @@ const toggleProjectInput = () => {
 
 const handleAddProjectClick = () => {
   const projectName = projectInput.value;
+  if(!projectName) return;
+
   addToProjectArray(projectName);
   resetNewProjectInput();
   projectsContainer.appendChild(makeNewProjectButton(projectName));
