@@ -2,6 +2,21 @@
   box-sizing: border-box;
 }
 
+.content-container {
+  display: grid;
+  grid: 1fr / 1fr 4fr;
+}
+
+.sidebar {
+  grid-column: 1 / 2;
+  grid-row: 1;
+}
+
+.main-content {
+  grid-column: 2;
+  grid-row: 1;
+}
+
 #task-form {
   position: absolute;
   border: 1px saddlebrown solid;

@@ -4,7 +4,7 @@ import { currentProject } from "./addProject.js";
 
 const newToDoButton = document.getElementById('new-to-do');
 const newTaskForm = document.getElementById('task-form');
-const toDoContainer = document.querySelector('.to-do-container');
+const toDoContainer = document.querySelector('.main-content');
 
 const toggleTaskForm = () => {
   newTaskForm.classList.toggle('show');

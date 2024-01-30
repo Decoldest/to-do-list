@@ -7,64 +7,69 @@
     <title>To Do List</title>
   </head>
   <body>
-    <button id="new-to-do">+</button>
-    <form id="task-form">
-      <p>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          placeholder="Title"
-          required
-        />
-      </p>
-      <p>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          placeholder="Description"
-        />
-      </p>
-      <p>
-        <input type="date" name="duedate" id="duedate" placeholder="duedate" />
-      </p>
-      <label for="priority">Priority:</label>
-      <select id="priority" name="priority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-        <option value="critical">Critical</option>
-      </select>
-      <p>
-        <textarea
-          id="notes"
-          name="notes"
-          rows="5"
-          cols="20"
-          placeholder="Notes..."
-        ></textarea>
-      </p>
-      <p>
-        <button type="submit" value="submit" id="modal-confirm">Confirm</button>
-      </p>
-    </form>
-    <div class="to-do-container">
-      
-    </div>
-    <div>
-      <button id="new-project">+</button>
-      <span class="project-span">
-        <input id="project-input" type="text" placeholder="New Project">
-        <button id="add-project">Add</button>
-        <button id="cancel-add-project">Cancel</button>
-      </span>
-    </div>
-
-    <div class="projects-container">
-      <button class="current-project" id="inbox">Inbox</button>
-      <button class="current-project" id="projects">Projects</button>
-      <button class="current-project" id="etc">Etc</button>
+    <div class="content-container">
+      <div class="main-content">
+        <div class="to-do-container">
+        
+        </div>
+      </div>
+      <div class="sidebar">
+        <button id="new-to-do">+</button>
+        <form id="task-form">
+          <p>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title"
+              required
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Description"
+            />
+          </p>
+          <p>
+            <input type="date" name="duedate" id="duedate" placeholder="duedate" />
+          </p>
+          <label for="priority">Priority:</label>
+          <select id="priority" name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+          <p>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="5"
+              cols="20"
+              placeholder="Notes..."
+            ></textarea>
+          </p>
+          <p>
+            <button type="submit" value="submit" id="modal-confirm">Confirm</button>
+          </p>
+        </form>
+        <div>
+          <button id="new-project">+</button>
+          <span class="project-span">
+            <input id="project-input" type="text" placeholder="New Project">
+            <button id="add-project">Add</button>
+            <button id="cancel-add-project">Cancel</button>
+          </span>
+        </div>
+        <div class="projects-container">
+          <button class="current-project" id="inbox">Inbox</button>
+          <button class="current-project" id="projects">Projects</button>
+          <button class="current-project" id="etc">Etc</button>
+        </div>
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
