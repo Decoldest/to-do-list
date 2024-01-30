@@ -1,5 +1,6 @@
 import { addToProjects, getProjects } from "./projects.js";
 import { makeToDo } from "./toDos.js";
+import { toggleProjectInput } from "./addProject.js";
 
 let currentProject = 'inbox';
 const buttons = Array.from(document.querySelectorAll('.current-project'));
@@ -9,6 +10,8 @@ for (let button of buttons) {
     currentProject = button.id;
   });
 }
+
+document.getElementById('new-project').onclick = toggleProjectInput;
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
@@ -25,7 +28,6 @@ function getTaskData(form) {
   console.log(getProjects());
 }
 
-
 function setAddTaskConfirm() {
   const toDoForm = document.getElementById("task-form");
   toDoForm.addEventListener("submit", (e) => {
@@ -36,4 +38,3 @@ function setAddTaskConfirm() {
 }
 
 setAddTaskConfirm();
-// addToProjects(makeToDo('fg', 'sfg', 'tert', 'wt', 'wrttrt'), 'Guys');

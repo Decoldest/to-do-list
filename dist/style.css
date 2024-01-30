@@ -1,3 +1,19 @@
 * {
   box-sizing: border-box;
 }
+span {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#project-input, #add, #cancel {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+}
+
+#project-input.show , #add.show, #cancel.show{
+  transform: translateX(0);
+  opacity: 1;
+}
