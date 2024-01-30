@@ -1,6 +1,6 @@
 const projects = {
-  'inbox': [],
-}
+  inbox: [],
+};
 
 function getProjects() {
   return projects;

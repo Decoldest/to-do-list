@@ -1,35 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List</title>
-</head>
-<body>
-  <form id="task-form">
-    <p>
-      <input type="text" name="title" id="title" placeholder="Title" required>
-    </p>
-    <p>
-      <input type="text" name="description" id="description" placeholder="Description">
-    </p>
-    <p>
-      <input type="date" name="duedate" id="duedate" placeholder="duedate">
-    </p>
-    <label for="priority">Priority:</label>
-    <select id="priority" name="priority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-      <option value="critical">Critical</option>
-    </select>
-    <p>
-      <textarea id="notes" name="notes" rows="5" cols="20" placeholder="Notes..."></textarea>
-    </p>
-    <p>
-      <button type="submit" value="submit" id="modal-confirm">Confirm</button>
-    </p>
-  </form>
-  <script src="main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+    <title>To Do List</title>
+  </head>
+  <body>
+    <form id="task-form">
+      <p>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Title"
+          required
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          placeholder="Description"
+        />
+      </p>
+      <p>
+        <input type="date" name="duedate" id="duedate" placeholder="duedate" />
+      </p>
+      <label for="priority">Priority:</label>
+      <select id="priority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="critical">Critical</option>
+      </select>
+      <p>
+        <textarea
+          id="notes"
+          name="notes"
+          rows="5"
+          cols="20"
+          placeholder="Notes..."
+        ></textarea>
+      </p>
+      <p>
+        <button type="submit" value="submit" id="modal-confirm">Confirm</button>
+      </p>
+    </form>
+    <div class="to-do-container">
+      
+    </div>
+    <div>
+      <button class="new-project">+</button>
+      <input type="text" placeholder="New Project">
+    </div>
+
+    <div class="projects-container">
+      <button class="current-project" id="inbox">Inbox</button>
+      <button class="current-project" id="projects">Projects</button>
+      <button class="current-project" id="etc">Etc</button>
+    </div>
+    <script src="main.js"></script>
+  </body>
 </html>
