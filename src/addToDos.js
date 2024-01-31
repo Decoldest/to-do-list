@@ -4,7 +4,7 @@ import { currentProject } from "./addProject.js";
 
 const newToDoButton = document.getElementById('new-to-do');
 const newTaskForm = document.getElementById('task-form');
-const toDoContainer = document.querySelector('.main-content');
+const toDoContainer = document.querySelector('.to-do-container');
 
 const toggleTaskForm = () => {
   newTaskForm.classList.toggle('show');
@@ -28,28 +28,34 @@ function getTaskData(form) {
     ),
     currentProject
   );
+  return newTask;
 }
 
 function setAddTaskConfirm() {
   newTaskForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    getTaskData(e.target);
+    addSingleTask(getTaskData(e.target));
     resetTaskForm();
   });
 }
 
 const resetTaskForm = () => {
   newTaskForm.reset();
-  updateTaskDisplay();
   toggleTaskForm();
 }
 
+//Updates entire display
 const updateTaskDisplay = () => {
+  toDoContainer.innerHTML = "";
   const currentTaskArray = getProjects()[currentProject];
   for (const task of currentTaskArray) {
-    console.log(task);
     appendTask(task.title, task.description, task.dueDate, task.priority, task.notes);
   }
+}
+
+//Adds only one task
+const addSingleTask = (newTask) => {
+  appendTask(newTask.title, newTask.description, newTask.dueDate, newTask.priority, newTask.notes);
 }
 
 const appendTask = (title, description, dueDate, priority, notes) => {
@@ -62,7 +68,6 @@ const appendTask = (title, description, dueDate, priority, notes) => {
   <p>${notes}</p>`
 
   toDoContainer.appendChild(taskCardContainer);
-  console.log("appended");
 }
 
-export { setNewToDoListener, setAddTaskConfirm }
+export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay }

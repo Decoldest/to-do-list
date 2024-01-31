@@ -17,6 +17,16 @@
   grid-row: 1;
 }
 
+.to-do-container>div {
+  display: flex;
+  align-items: center;
+}
+
+.to-do-container>div>* {
+  flex: 1;
+  overflow: scroll;
+}
+
 #task-form {
   position: absolute;
   border: 1px saddlebrown solid;

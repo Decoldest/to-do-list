@@ -5,6 +5,7 @@ class toDo {
     this.dueDate = dueDate || "No Due Date";
     this.priority = priority;
     this.notes = notes;
+    this.completed = 'no';
   }
 
   getData() {
