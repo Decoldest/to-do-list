@@ -1,6 +1,9 @@
 import { addToProjects, getProjects } from "./projects.js";
 import { makeToDo } from "./toDos.js";
 import { currentProject } from "./addProject.js";
+import { format, isValid } from "date-fns";
+
+
 
 const newToDoButton = document.getElementById('new-to-do');
 const newTaskForm = document.getElementById('task-form');
@@ -18,18 +21,18 @@ const setNewToDoListener = () => {
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
-  addToProjects(
-    makeToDo(
-      newTask.title,
-      newTask.description,
-      newTask.dueDate,
-      newTask.priority,
-      newTask.notes,
-    ),
-    currentProject
-  );
+  console.log(newTask);
+  newTask.dueDate = formatDate(newTask.dueDate)
   return newTask;
+
+  function formatDate(date){
+    let formattedDate = new Date(newTask.dueDate);
+
+    return isValid(formattedDate) ? format(formattedDate, 'eee, PPP') :
+      'No Due Date';
+  }
 }
+
 
 function setAddTaskConfirm() {
   newTaskForm.addEventListener("submit", (e) => {
@@ -55,6 +58,16 @@ const updateTaskDisplay = () => {
 
 //Adds only one task
 const addSingleTask = (newTask) => {
+  addToProjects(
+    makeToDo(
+      newTask.title,
+      newTask.description,
+      newTask.dueDate,
+      newTask.priority,
+      newTask.notes,
+    ),
+    currentProject
+  );
   appendTask(newTask.title, newTask.description, newTask.dueDate, newTask.priority, newTask.notes);
 }
 
