@@ -45,7 +45,6 @@ const createButton = (name) => {
 const projectBarListener = (button) => {
   button.addEventListener('click', () => {
     currentProject = button.id;
-//    console.log(currentProject);
   });
 }
 

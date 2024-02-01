@@ -17,12 +17,21 @@
   grid-row: 1;
 }
 
+.to-do-container {
+  border: 1px solid salmon;
+}
+
 .to-do-container>div {
   display: flex;
   align-items: center;
 }
 
-.to-do-container>div>* {
+.to-do-container>div> h2,h4 {
+  flex: 2;
+  overflow: scroll;
+}
+
+.to-do-container>div> p {
   flex: 1;
   overflow: scroll;
 }
@@ -59,22 +68,4 @@ span {
 #task-form.show {
   transform: translateX(100%);
   opacity: 1;
-}
-#title {
-  transition-delay: 0.2s; /* Delay for 0.2 seconds */
-}
-#description {
-  transition-delay: 0.4s; /* Delay for 0.4 seconds */
-}
-#duedate {
-  transition-delay: 0.6s; /* Delay for 0.6 seconds */
-}
-#priority {
-  transition-delay: 0.8s; /* Delay for 0.8 seconds */
-}
-#notes {
-  transition-delay: 1s; /* Delay for 1 second */
-}
-#modal-confirm {
-  transition-delay: 1.2s; /* Delay for 1.2 seconds */
 }

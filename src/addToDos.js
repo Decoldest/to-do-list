@@ -1,9 +1,7 @@
-import { addToProjects, getProjects } from "./projects.js";
+import { addToProjects, getProjects, removeTaskFromProjects } from "./projects.js";
 import { makeToDo } from "./toDos.js";
 import { currentProject } from "./addProject.js";
 import { format, isValid } from "date-fns";
-
-
 
 const newToDoButton = document.getElementById('new-to-do');
 const newTaskForm = document.getElementById('task-form');
@@ -21,18 +19,16 @@ const setNewToDoListener = () => {
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
-  console.log(newTask);
   newTask.dueDate = formatDate(newTask.dueDate)
   return newTask;
 
   function formatDate(date){
     let formattedDate = new Date(newTask.dueDate);
 
-    return isValid(formattedDate) ? format(formattedDate, 'eee, PPP') :
+    return isValid(formattedDate) ? format(formattedDate, 'eee, MMM wo') :
       'No Due Date';
   }
 }
-
 
 function setAddTaskConfirm() {
   newTaskForm.addEventListener("submit", (e) => {
@@ -47,10 +43,14 @@ const resetTaskForm = () => {
   toggleTaskForm();
 }
 
+const getCurrentTaskArray = () => {
+  return getProjects()[currentProject];
+}
+
 //Updates entire display
 const updateTaskDisplay = () => {
   toDoContainer.innerHTML = "";
-  const currentTaskArray = getProjects()[currentProject];
+  const currentTaskArray = getCurrentTaskArray();
   for (const task of currentTaskArray) {
     appendTask(task.title, task.description, task.dueDate, task.priority, task.notes);
   }
@@ -68,19 +68,31 @@ const addSingleTask = (newTask) => {
     ),
     currentProject
   );
-  appendTask(newTask.title, newTask.description, newTask.dueDate, newTask.priority, newTask.notes);
+  appendTask(newTask);
 }
 
-const appendTask = (title, description, dueDate, priority, notes) => {
+const appendTask = (newTask) => {
   const taskCardContainer = document.createElement('div');
   taskCardContainer.innerHTML = 
-  `<h2>${title}</h2>
-  <p>${description}</p>
-  <h4>${dueDate}</h4>
-  <p>${priority}</p>
-  <p>${notes}</p>`
+  `<h2>${newTask.title}</h2>
+  <p>${newTask.description}</p>
+  <h4>${newTask.dueDate}</h4>
+  <p>${newTask.priority}</p>
+  <p>${newTask.notes}</p>`
 
+  const deleteButton = addDeleteTaskListener(newTask);
+  taskCardContainer.appendChild(deleteButton);
+  
   toDoContainer.appendChild(taskCardContainer);
+  
+}
+
+const addDeleteTaskListener = (newTask) => {
+  const deleteButton = document.createElement('button');
+  deleteButton.addEventListener('click', () => {
+    removeTaskFromProjects(newTask);
+  });
+  return deleteButton;
 }
 
 export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay }
