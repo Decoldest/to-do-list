@@ -1,4 +1,5 @@
 class toDo {
+
   constructor(title, description, dueDate, priority, notes) {
     this.title = title;
     this.description = description;
@@ -15,6 +16,7 @@ class toDo {
       dueDate: this.dueDate,
       priority: this.priority,
       notes: this.notes,
+      id:this.id
     };
   }
 }

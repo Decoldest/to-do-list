@@ -23,7 +23,7 @@ function getTaskData(form) {
   return newTask;
 
   function formatDate(date){
-    let formattedDate = new Date(newTask.dueDate);
+    let formattedDate = new Date(date);
 
     return isValid(formattedDate) ? format(formattedDate, 'eee, MMM wo') :
       'No Due Date';
@@ -73,6 +73,7 @@ const addSingleTask = (newTask) => {
 
 const appendTask = (newTask) => {
   const taskCardContainer = document.createElement('div');
+  
   taskCardContainer.innerHTML = 
   `<h2>${newTask.title}</h2>
   <p>${newTask.description}</p>
@@ -80,16 +81,27 @@ const appendTask = (newTask) => {
   <p>${newTask.priority}</p>
   <p>${newTask.notes}</p>`
 
+  const completedButton = addCompletedButton();
+  taskCardContainer.insertBefore(completedButton, taskCardContainer.children[0])
+
   const deleteButton = addDeleteTaskListener(newTask);
   taskCardContainer.appendChild(deleteButton);
   
   toDoContainer.appendChild(taskCardContainer);
-  
+}
+
+const addCompletedButton = () => {
+  const completedButton = document.createElement('button');
+  completedButton.addEventListener('click', (e) => {
+    e.currentTarget.parentNode.classList.toggle('completed');
+  });
+  return completedButton;
 }
 
 const addDeleteTaskListener = (newTask) => {
   const deleteButton = document.createElement('button');
-  deleteButton.addEventListener('click', () => {
+  deleteButton.addEventListener('click', (e) => {
+    e.currentTarget.parentNode.remove();
     removeTaskFromProjects(newTask);
   });
   return deleteButton;

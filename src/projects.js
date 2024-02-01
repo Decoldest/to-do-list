@@ -11,7 +11,8 @@ function removeTaskFromProjects (taskToDelete) {
     console.log(taskToDelete);
     console.log(projects[project]);
     
-    const index = projects[project].findIndex(i => i.title === taskToDelete.title);
+    const index = projects[project].findIndex(i => i.title === taskToDelete.title 
+      && i.dueDate === taskToDelete.dueDate);
     console.log(index);
 
     if (index !== -1) {

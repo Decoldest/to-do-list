@@ -69,3 +69,7 @@ span {
   transform: translateX(100%);
   opacity: 1;
 }
+
+.completed {
+  background-color: grey;
+}
