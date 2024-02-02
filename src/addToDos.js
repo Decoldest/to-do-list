@@ -71,40 +71,40 @@ const addSingleTask = (newTask) => {
   appendTask(newTask);
 }
 
-const appendTask = (newTask) => {
-  const taskCardContainer = document.createElement('div');
-  
-  taskCardContainer.innerHTML = 
-  `<h2>${newTask.title}</h2>
+const createTaskCardHTML = (newTask) => `
+  <h2>${newTask.title}</h2>
   <p>${newTask.description}</p>
   <h4>${newTask.dueDate}</h4>
   <p>${newTask.priority}</p>
-  <p>${newTask.notes}</p>`
+  <h6>${newTask.notes}</h6>`;
+
+const addButton = (text, clickHandler) => {
+  const button = document.createElement('button');
+  button.textContent = text;
+  button.addEventListener('click', clickHandler);
+  return button;
+};
+
+const addCompletedButton = () => addButton('Complete', (e) => {
+  e.currentTarget.parentNode.classList.toggle('completed');
+});
+
+const addDeleteButton = (newTask) => addButton('Delete', (e) => {
+  e.currentTarget.parentNode.remove();
+  removeTaskFromProjects(newTask);
+});
+
+const appendTask = (newTask) => {
+  const taskCardContainer = document.createElement('div');
+  taskCardContainer.innerHTML = createTaskCardHTML(newTask);
 
   const completedButton = addCompletedButton();
-  taskCardContainer.insertBefore(completedButton, taskCardContainer.children[0])
+  taskCardContainer.insertBefore(completedButton, taskCardContainer.children[0]);
 
-  const deleteButton = addDeleteTaskListener(newTask);
+  const deleteButton = addDeleteButton(newTask);
   taskCardContainer.appendChild(deleteButton);
-  
+
   toDoContainer.appendChild(taskCardContainer);
-}
-
-const addCompletedButton = () => {
-  const completedButton = document.createElement('button');
-  completedButton.addEventListener('click', (e) => {
-    e.currentTarget.parentNode.classList.toggle('completed');
-  });
-  return completedButton;
-}
-
-const addDeleteTaskListener = (newTask) => {
-  const deleteButton = document.createElement('button');
-  deleteButton.addEventListener('click', (e) => {
-    e.currentTarget.parentNode.remove();
-    removeTaskFromProjects(newTask);
-  });
-  return deleteButton;
-}
+};
 
 export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay }

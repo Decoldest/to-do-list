@@ -1,3 +1,7 @@
+:root {
+  --completed-color: rgb(214, 251, 185);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,6 +9,7 @@
 .content-container {
   display: grid;
   grid: 1fr / 1fr 4fr;
+  gap: 2svh;
 }
 
 .sidebar {
@@ -26,14 +31,23 @@
   align-items: center;
 }
 
-.to-do-container>div> h2,h4 {
-  flex: 2;
-  overflow: scroll;
+.to-do-container>div>* {
+  height: 6svh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.to-do-container>div> h2,h4,h6 {
+  flex: 3;
 }
 
 .to-do-container>div> p {
-  flex: 1;
-  overflow: scroll;
+  flex: 2;
+}
+
+.projects-container, .task-container {
+  display: flex;
+  flex-direction: column;
 }
 
 #task-form {
@@ -71,5 +85,5 @@ span {
 }
 
 .completed {
-  background-color: grey;
+  background-color:var(--completed-color);
 }

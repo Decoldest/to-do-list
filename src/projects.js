@@ -20,7 +20,6 @@ function removeTaskFromProjects (taskToDelete) {
       projects[project].splice(index, 1);
     }
   }
-  
   console.log(projects);
 }
 
@@ -28,6 +27,7 @@ function addToProjects (task, project) {
   projects[project] = projects[project] ?? [];
   projects[project].push(task);
   console.log(task.getData());
+  console.log(projects);
 }
 
 export function createNewProject(name) {

@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
     <title>To Do List</title>
   </head>
   <body>
     <div class="content-container">
       <div class="main-content">
         <h1>To-do</h1>
-        <div class="to-do-container">
-        
-        </div>
+        <div class="to-do-container"></div>
       </div>
       <div class="sidebar">
         <button id="new-to-do">+</button>
+        <div class="task-container">
+          <button class="task-section" id="all">All Tasks</button>
+          <button class="task-section" id="today">Today</button>
+          <button class="task-section" id="week">This Week</button>
+        </div>
         <form id="task-form">
           <p>
             <input
@@ -66,9 +70,8 @@
           </span>
         </div>
         <div class="projects-container">
-          <button class="current-project" id="inbox">Inbox</button>
-          <button class="current-project" id="projects">Projects</button>
-          <button class="current-project" id="etc">Etc</button>
+          <button class="current-project" id="home">Home</button>
+          <button class="current-project" id="work">Work</button>
         </div>
       </div>
     </div>
