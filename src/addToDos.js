@@ -8,6 +8,12 @@ const newTaskForm = document.getElementById('task-form');
 const toDoContainer = document.querySelector('.to-do-container');
 const taskButtons = Array.from(document.querySelectorAll('.task-section'));
 
+let currentFilter = () => true;
+
+window.onload = function () {
+  document.getElementById("all").autofocus;
+};
+
 const toggleTaskForm = () => {
   newTaskForm.classList.toggle('show');
 };
@@ -66,7 +72,7 @@ const addSingleTask = (newTask) => {
     ),
     currentProject
   );
-  appendTask(newTask);
+  if(currentFilter(newTask)) { appendTask(newTask); }
 }
 
 const createTaskCardHTML = (newTask) => `
@@ -108,18 +114,27 @@ const appendTask = (newTask) => {
 
 taskButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    let selection;
-    if(btn.id === 'today') {
-      selection = getAllTasks().filter((task) => isToday(task.dueDate));
-    } else if(btn.id === 'week') {
-      selection = getAllTasks().filter((task) => isThisWeek(task.dueDate));
-    } else if(btn.id === 'week') {
-      selection = getAllTasks;
+    switch (btn.id) {
+      case 'today':
+        currentFilter = (task) => isToday(task.dueDate);
+        break;
+      case 'week':
+        currentFilter = (task) => isThisWeek(task.dueDate);
+        break;
+      case 'all':
+        currentFilter = () => true; // Reset filter, includes all tasks
+        break;
+      default:
+        break;
     }
 
-    updateTaskDisplay(selection);
+    filterDisplay(currentFilter);
   });
 });
 
+const filterDisplay = (currentFilter) => {
+  const selection = getAllTasks().filter(task => currentFilter(task));
+  updateTaskDisplay(selection);
+}
 
 export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay }
