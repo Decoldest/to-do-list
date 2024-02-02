@@ -14,6 +14,12 @@ window.onload = function () {
   document.getElementById("all").autofocus;
 };
 
+window.onclick = function(event) {
+  if (event.target == newTaskForm && newTaskForm.classList.contains('show')) {
+    newTaskForm.classList.remove('show');
+  }
+}
+
 const toggleTaskForm = () => {
   newTaskForm.classList.toggle('show');
 };
@@ -42,6 +48,8 @@ function setAddTaskConfirm() {
     resetTaskForm();
   });
 }
+
+document.getElementById('modal-cancel').addEventListener('click', toggleTaskForm);
 
 const resetTaskForm = () => {
   newTaskForm.reset();

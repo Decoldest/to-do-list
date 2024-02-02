@@ -53,6 +53,8 @@
 #task-form {
   position: absolute;
   border: 1px saddlebrown solid;
+  background-color: beige;
+  width: clamp(200px, 22svw, 30svw)
 }
 
 span {
@@ -75,12 +77,13 @@ span {
 #add-project.show, 
 #cancel-add-project.show
 {
-  transform: translateX(0);
+  transform: translateX(0%);
   opacity: 1;
 }
 
 #task-form.show {
-  transform: translateX(100%);
+  left: 10%;
+  transform: translateX(120%);
   opacity: 1;
 }
 
