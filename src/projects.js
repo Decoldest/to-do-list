@@ -30,10 +30,14 @@ function addToProjects (task, project) {
   console.log(projects);
 }
 
+function getAllTasks() {
+  return Object.entries(projects).reduce((accumulator, [_, projectTasks]) => accumulator.concat(projectTasks), []);
+}
+
 export function createNewProject(name) {
   if (!projects[name]) {
     projects[name] = [];
   }
 }
 
-export { addToProjects, getProjects, removeTaskFromProjects };
+export { addToProjects, getProjects, removeTaskFromProjects, getAllTasks };

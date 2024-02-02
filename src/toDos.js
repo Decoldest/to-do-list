@@ -16,7 +16,6 @@ class toDo {
       dueDate: this.dueDate,
       priority: this.priority,
       notes: this.notes,
-      id:this.id
     };
   }
 }

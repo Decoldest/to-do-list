@@ -1,11 +1,12 @@
-import { addToProjects, getProjects, removeTaskFromProjects } from "./projects.js";
+import { addToProjects, getProjects, removeTaskFromProjects, getAllTasks } from "./projects.js";
 import { makeToDo } from "./toDos.js";
 import { currentProject } from "./addProject.js";
-import { format, isValid } from "date-fns";
+import { format, isValid, isThisWeek, parseISO, isToday } from "date-fns";
 
 const newToDoButton = document.getElementById('new-to-do');
 const newTaskForm = document.getElementById('task-form');
 const toDoContainer = document.querySelector('.to-do-container');
+const taskButtons = Array.from(document.querySelectorAll('.task-section'));
 
 const toggleTaskForm = () => {
   newTaskForm.classList.toggle('show');
@@ -19,15 +20,13 @@ const setNewToDoListener = () => {
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
-  newTask.dueDate = formatDate(newTask.dueDate)
+  newTask.dueDate = newTask.dueDate;
   return newTask;
+}
 
-  function formatDate(date){
-    let formattedDate = new Date(date);
-
-    return isValid(formattedDate) ? format(formattedDate, 'eee, MMM wo') :
-      'No Due Date';
-  }
+function formatDate(date){
+  let formattedDate = parseISO(date);
+  return isValid(formattedDate) ? format(formattedDate, 'eee, MMM d') : 'No Due Date';
 }
 
 function setAddTaskConfirm() {
@@ -48,11 +47,10 @@ const getCurrentTaskArray = () => {
 }
 
 //Updates entire display
-const updateTaskDisplay = () => {
+const updateTaskDisplay = (currentTaskArray) => {
   toDoContainer.innerHTML = "";
-  const currentTaskArray = getCurrentTaskArray();
   for (const task of currentTaskArray) {
-    appendTask(task.title, task.description, task.dueDate, task.priority, task.notes);
+    appendTask(task);
   }
 }
 
@@ -74,7 +72,7 @@ const addSingleTask = (newTask) => {
 const createTaskCardHTML = (newTask) => `
   <h2>${newTask.title}</h2>
   <p>${newTask.description}</p>
-  <h4>${newTask.dueDate}</h4>
+  <h4>${formatDate(newTask.dueDate)}</h4>
   <p>${newTask.priority}</p>
   <h6>${newTask.notes}</h6>`;
 
@@ -95,6 +93,7 @@ const addDeleteButton = (newTask) => addButton('Delete', (e) => {
 });
 
 const appendTask = (newTask) => {
+  console.log(newTask);
   const taskCardContainer = document.createElement('div');
   taskCardContainer.innerHTML = createTaskCardHTML(newTask);
 
@@ -106,5 +105,21 @@ const appendTask = (newTask) => {
 
   toDoContainer.appendChild(taskCardContainer);
 };
+
+taskButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    let selection;
+    if(btn.id === 'today') {
+      selection = getAllTasks().filter((task) => isToday(task.dueDate));
+    } else if(btn.id === 'week') {
+      selection = getAllTasks().filter((task) => isThisWeek(task.dueDate));
+    } else if(btn.id === 'week') {
+      selection = getAllTasks;
+    }
+
+    updateTaskDisplay(selection);
+  });
+});
+
 
 export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay }
