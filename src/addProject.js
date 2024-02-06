@@ -1,17 +1,20 @@
 import { createNewProject as addToProjectArray, getAllTasks } from './projects.js';
 import { updateTaskDisplay } from './addToDos.js'
 
-
 const newProjectButton = document.getElementById('new-project');
 const projectInput = document.getElementById('project-input');
 const addProjectButton = document.getElementById('add-project');
 const cancelAddProject = document.getElementById('cancel-add-project');
 const projectsContainer = document.querySelector('.projects-container');
+const displayCategory = document.getElementById('category');
+const projectSpan = document.querySelector('.project-span');
+
 
 let currentProject = '';
 
 //Allows new project input to slide in 
 const toggleProjectInput = () => {
+  projectSpan.classList.toggle('active');
   projectInput.classList.toggle('show');
   addProjectButton.classList.toggle('show');
   cancelAddProject.classList.toggle('show');
@@ -49,6 +52,7 @@ const projectBarListener = (button) => {
     updateCurrentProject(button.id);
     console.log(currentProject);
     filterDisplay(currentProject);
+    displayCategory.textContent = button.id.toUpperCase();
   });
 }
 

@@ -8,6 +8,7 @@ const newTaskForm = document.getElementById('task-form');
 const toDoContainer = document.querySelector('.to-do-container');
 const taskButtons = Array.from(document.querySelectorAll('.task-section'));
 const editForm = document.getElementById('edit-form')
+const displayCategory = document.getElementById('category');
 
 let currentFilter = () => true;
 
@@ -81,7 +82,7 @@ const addSingleTask = (newTask) => {
 
 const createTaskCardHTML = (newTask) => `
   <h2>${newTask.title}</h2>
-  <p>${newTask.description}</p>
+  <h4>${newTask.description}</h4>
   <h4>${formatDate(newTask.dueDate)}</h4>
   <p>${newTask.priority}</p>
   <h6>${newTask.notes}</h6>`;
@@ -161,12 +162,15 @@ taskButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     switch (btn.id) {
       case 'today':
+        displayCategory.textContent = 'Today';
         currentFilter = (task) => isToday(task.dueDate);
         break;
       case 'week':
+        displayCategory.textContent = 'This Week';
         currentFilter = (task) => isThisWeek(task.dueDate);
         break;
       case 'all':
+        displayCategory.textContent = 'All Tasks';
         currentFilter = () => true; // Reset filter, includes all tasks
         break;
       default:
