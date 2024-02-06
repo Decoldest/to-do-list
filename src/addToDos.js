@@ -1,6 +1,6 @@
 import { addToProjects, getProjects, removeTaskFromProjects, getAllTasks } from "./projects.js";
 import { makeToDo } from "./toDos.js";
-import { currentProject } from "./addProject.js";
+import { currentProject, updateCurrentProject } from "./addProject.js";
 import { format, isValid, isThisWeek, parseISO, isToday } from "date-fns";
 
 const newToDoButton = document.getElementById('new-to-do');
@@ -13,12 +13,6 @@ let currentFilter = () => true;
 window.onload = function () {
   document.getElementById("all").autofocus;
 };
-
-window.onclick = function(event) {
-  if (event.target == newTaskForm && newTaskForm.classList.contains('show')) {
-    newTaskForm.classList.remove('show');
-  }
-}
 
 const toggleTaskForm = () => {
   newTaskForm.classList.toggle('show');
@@ -56,13 +50,12 @@ const resetTaskForm = () => {
   toggleTaskForm();
 }
 
-const getCurrentTaskArray = () => {
-  return getProjects()[currentProject];
-}
-
 //Updates entire display
 const updateTaskDisplay = (currentTaskArray) => {
   toDoContainer.innerHTML = "";
+  if (currentTaskArray.length === 0) {
+    toDoContainer.textContent = "No tasks.";
+  }
   for (const task of currentTaskArray) {
     appendTask(task);
   }
@@ -77,6 +70,7 @@ const addSingleTask = (newTask) => {
       newTask.dueDate,
       newTask.priority,
       newTask.notes,
+      currentProject,
     ),
     currentProject
   );
@@ -106,8 +100,8 @@ const addDeleteButton = (newTask) => addButton('Delete', (e) => {
   removeTaskFromProjects(newTask);
 });
 
+
 const appendTask = (newTask) => {
-  console.log(newTask);
   const taskCardContainer = document.createElement('div');
   taskCardContainer.innerHTML = createTaskCardHTML(newTask);
 
@@ -135,7 +129,7 @@ taskButtons.forEach(btn => {
       default:
         break;
     }
-
+    updateCurrentProject('');
     filterDisplay(currentFilter);
   });
 });
@@ -145,4 +139,4 @@ const filterDisplay = (currentFilter) => {
   updateTaskDisplay(selection);
 }
 
-export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay }
+export { setNewToDoListener, setAddTaskConfirm, updateTaskDisplay, filterDisplay }

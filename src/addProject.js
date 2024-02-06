@@ -1,4 +1,6 @@
-import { createNewProject as addToProjectArray } from './projects.js';
+import { createNewProject as addToProjectArray, getAllTasks } from './projects.js';
+import { updateTaskDisplay } from './addToDos.js'
+
 
 const newProjectButton = document.getElementById('new-project');
 const projectInput = document.getElementById('project-input');
@@ -6,7 +8,7 @@ const addProjectButton = document.getElementById('add-project');
 const cancelAddProject = document.getElementById('cancel-add-project');
 const projectsContainer = document.querySelector('.projects-container');
 
-let currentProject = 'inbox';
+let currentProject = '';
 
 //Allows new project input to slide in 
 const toggleProjectInput = () => {
@@ -44,8 +46,19 @@ const createButton = (name) => {
 
 const projectBarListener = (button) => {
   button.addEventListener('click', () => {
-    currentProject = button.id;
+    updateCurrentProject(button.id);
+    console.log(currentProject);
+    filterDisplay(currentProject);
   });
+}
+
+const updateCurrentProject = (project) => {
+  currentProject = project;
+}
+
+const filterDisplay = (currentProject) => {
+  const selection = getAllTasks().filter(task => task.project === currentProject);
+  updateTaskDisplay(selection);
 }
 
 //Creates a new project button for the project bar
@@ -55,8 +68,13 @@ function makeNewProjectButton(name) {
   return newProjectButton;
 }
 
+
 addProjectButton.addEventListener('click', handleAddProjectClick);
 cancelAddProject.addEventListener('click', handleCancelAddProjectClick);
+
+document.querySelectorAll('.current-project').forEach(button => {
+    projectBarListener(button);
+});
 
 const setNewProjectListener = () => {
   newProjectButton.addEventListener('click', () => {
@@ -64,4 +82,4 @@ const setNewProjectListener = () => {
   });
 };
 
-export { setNewProjectListener, currentProject }
+export { setNewProjectListener, currentProject, updateCurrentProject }

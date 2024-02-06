@@ -11,8 +11,7 @@ function removeTaskFromProjects (taskToDelete) {
     console.log(taskToDelete);
     console.log(projects[project]);
     
-    const index = projects[project].findIndex(i => i.title === taskToDelete.title 
-      && i.dueDate === taskToDelete.dueDate);
+    const index = projects[project].findIndex(i => i.id === taskToDelete.id);
     console.log(index);
 
     if (index !== -1) {
@@ -20,7 +19,6 @@ function removeTaskFromProjects (taskToDelete) {
       projects[project].splice(index, 1);
     }
   }
-  console.log(projects);
 }
 
 function addToProjects (task, project) {

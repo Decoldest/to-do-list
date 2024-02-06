@@ -58,6 +58,7 @@
 }
 
 span {
+  flex: 0;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
