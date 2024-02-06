@@ -1,21 +1,32 @@
 :root {
-  --completed-color: rgb(214, 251, 185);
-  --pending-color: rgb(227, 226, 226);
+  --completed-color: rgb(231, 255, 213);
+  --pending-color: rgb(243, 243, 243);
+  --border-color: rgb(209, 207, 207);
+  --button-default-color: rgb(207, 235, 240);
+  --to-do-btn-color: rgb(185, 219, 176);
+  --task-form-background: rgb(240, 240, 224);
 }
 
 * {
   box-sizing: border-box;
+  font-family: 'Manrope', sans-serif;
 }
 
 .content-container {
   display: grid;
   grid: 1fr / 1fr 4fr;
   gap: 2svh;
+  height: 100%;
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
   grid-column: 1 / 2;
   grid-row: 1;
+  padding: 20px;
 }
 
 .main-content {
@@ -26,8 +37,9 @@
 .to-do-container>div {
   display: flex;
   align-items: center;
-  height: 12svh;
+  padding: 2svh;
   gap: 1%;
+  border-bottom: 0.1rem solid var(--border-color);
 }
 
 .to-do-container>div>* {
@@ -51,13 +63,61 @@
 .projects-container, .task-container {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 #task-form {
   position: absolute;
-  background-color: beige;
-  width: clamp(200px, 22svw, 30svw)
+  top: 10%;
+  background-color: var(--task-form-background);
+  width: clamp(200px, 22svw, 30svw);
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
+#task-form input[type="text"],
+#task-form input[type="date"],
+#task-form select,
+#task-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style for form button */
+#task-form button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+#modal-cancel {
+  background-color: #dc3545;
+}
+
+#task-form button:hover,
+#modal-cancel:hover {
+  background-color: #0056b3;
+}
+
+#task-form p {
+  text-align: center;
+}
+
+#task-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
 .project-span {
   height: 0;
   display: inline-block;
@@ -108,4 +168,28 @@
   visibility: hidden;
   opacity: 0;
   height: 0px;
+}
+
+.sidebar button {
+  border-radius: 5px;
+  border: none;
+  padding: 1rem;
+  background-color: var(--button-default-color);
+  cursor: pointer; 
+}
+.sidebar button:hover {
+  background-color: #d4d4d4;
+}
+#new-to-do {
+  background-color: var(--to-do-btn-color);
+}
+
+#add-project, #cancel-add-project {
+  background-color: rgb(204, 210, 210);
+  padding: 5%;
+}
+
+#task-form.show {
+  opacity: 1; /* Highlight: Show when active */
+  visibility: visible; /* Highlight: Show when active */
 }

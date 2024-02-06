@@ -59,56 +59,40 @@ export function createNewProject(name) {
   }
 }
 
+// Function to add default tasks if they haven't been added already
+// Function to add default tasks if they don't exist
 function addDefaultTasks() {
   const defaultTasks = [
     {
-      title: 'Default Task 1',
-      description: 'Description of Default Task 1',
+      title: 'Walk Dog',
+      description: 'He needs three walks a day',
       dueDate: '2024-02-06',
       priority: 'High',
-      notes: 'Notes for Default Task 1',
+      notes: 'His name is Bubba',
       completed: 'no',
       project: 'Default Project'
     },
     {
-      title: 'Default Task 2',
-      description: 'Description of Default Task 2',
+      title: 'Make lasagna',
+      description: 'Garfield wants lasagna',
       dueDate: '2024-02-07',
       priority: 'Medium',
-      notes: 'Notes for Default Task 2',
-      completed: 'no',
-      project: 'Default Project'
-    },
-    {
-      title: 'Default Task 5',
-      description: 'Description of Default Task 2',
-      dueDate: '2024-02-07',
-      priority: 'Medium',
-      notes: 'Notes for Default Task 2',
-      completed: 'no',
-      project: 'Default Project'
-    },
-    {
-      title: 'Default Task 6',
-      description: 'Description of Default Task 2',
-      dueDate: '2024-02-07',
-      priority: 'Medium',
-      notes: 'Notes for Default Task 2',
+      notes: 'Don\'t give him too much or he\'ll get fat',
       completed: 'no',
       project: 'Default Project'
     }
   ];
 
-  addToProjects(defaultTasks[0], 'Default Project');
-  addToProjects(defaultTasks[1], 'Default Project');
-}
+  const projects = getProjects();
+  const defaultProjectTasks = projects['Default Project'];
 
-function initializeDefaults() {
-  if (!localStorage.getItem('defaultsAdded')) {
-    addDefaultTasks();
-    localStorage.setItem('defaultsAdded', 'true');
+  if (!defaultProjectTasks || defaultProjectTasks.length === 0) {
+    addToProjects(defaultTasks[0], 'Default Project');
+    addToProjects(defaultTasks[1], 'Default Project');
   }
 }
-initializeDefaults();
+
+addDefaultTasks();
+
 
 export { addToProjects, getProjects, removeTaskFromProjects, getAllTasks, upDateComplete };
