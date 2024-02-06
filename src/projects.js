@@ -1,5 +1,4 @@
 const projects = {
-  inbox: [],
 };
 
 function getProjects () {

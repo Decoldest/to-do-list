@@ -27,7 +27,7 @@ const setNewToDoListener = () => {
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
-  newTask.dueDate = newTask.dueDate;
+  //newTask.dueDate = newTask.dueDate;
   return newTask;
 }
 
@@ -102,13 +102,16 @@ const addDeleteButton = (newTask) => addButton('Delete', (e) => {
   removeTaskFromProjects(newTask);
 });
 
-const addEditButton = (task, taskCardContainer) => addButton('Edit', (e) => {
+const addEditButton = (task) => addButton('Edit', (e) => {
   editToDo(task, e);
 });
 
 const editToDo = (task, e)  => {
-  editForm.classList.toggle('hidden');
-  e.currentTarget.parentNode.replaceWith(setEditForm(task));
+  let taskCardContainer = e.currentTarget.parentNode;
+  editForm.classList.remove('hidden');
+  taskCardContainer.classList.add('hidden');
+  taskCardContainer.parentNode.insertBefore(setEditForm(task), taskCardContainer);
+
 }
 
 const setEditForm = (task) => {
@@ -125,26 +128,34 @@ const setEditForm = (task) => {
 
   editForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+    editForm.classList.add('hidden');
+    const temp = getTaskData(e.target);
+    console.log(e.currentTarget.nextSibling);
+    e.currentTarget.nextSibling.replaceWith(makeTaskUI(temp));
   })
 
   return editForm;
 }
 
-const appendTask = (newTask) => {
+function makeTaskUI (task) {
+  console.log(task.dueDate);
   const taskCardContainer = document.createElement('div');
-  taskCardContainer.innerHTML = createTaskCardHTML(newTask);
+  taskCardContainer.innerHTML = createTaskCardHTML(task);
 
   const completedButton = addCompletedButton();
   taskCardContainer.insertBefore(completedButton, taskCardContainer.children[0]);
 
-  const editButton = addEditButton(newTask, taskCardContainer);
+  const editButton = addEditButton(task, taskCardContainer);
   taskCardContainer.appendChild(editButton);
 
-  const deleteButton = addDeleteButton(newTask, taskCardContainer);
+  const deleteButton = addDeleteButton(task, taskCardContainer);
   taskCardContainer.appendChild(deleteButton);
+  
+  return taskCardContainer;
+}
 
-  toDoContainer.appendChild(taskCardContainer);
+const appendTask = (newTask) => {
+  toDoContainer.appendChild(makeTaskUI(newTask));
 };
 
 taskButtons.forEach(btn => {
