@@ -1,7 +1,11 @@
 class toDo {
-  static nextID = 0;
   constructor(title, description, dueDate, priority, notes, project) {
-    this.id = toDo.nextID++;
+    if (!localStorage.getItem('nextID')) {
+      localStorage.setItem('nextID', '0');
+    }
+    this.id = parseInt(localStorage.getItem('nextID'));
+    localStorage.setItem('nextID', (this.id + 1).toString());
+    
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;

@@ -1,6 +1,6 @@
 :root {
   --completed-color: rgb(214, 251, 185);
-  --pending-color: rgb(185, 185, 185);
+  --pending-color: rgb(227, 226, 226);
 }
 
 * {

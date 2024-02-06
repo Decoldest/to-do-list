@@ -1,3 +1,6 @@
+let projects = {
+};
+
 const projectsKey = 'projects';
 
 function getProjects() {
@@ -8,31 +11,41 @@ function saveProjects(projects) {
   localStorage.setItem(projectsKey, JSON.stringify(projects));
 }
 
-function removeTaskFromProjects(taskToDelete) {
-  let projects = getProjects();
-  const index = projects.findIndex(i => i.id === taskToDelete.id);
-  if (index !== -1) {
-    projects.splice(index, 1);
-  }  
+function removeTaskFromProjects (taskToDelete) {
+  const projects = getProjects();
+  for (const project in projects) {
+    
+    const index = projects[project].findIndex(i => i.id === taskToDelete.id);
+    console.log(index);
+
+    if (index !== -1) {
+      projects[project].splice(index, 1);
+    }
+  }
   saveProjects(projects);
+
 }
 
 function upDateComplete(taskCompleted) {
   let projects = getProjects();
 
-  const index = projects.findIndex(i => i.id === taskCompleted.id);
-  if (index !== -1) {
-    projects[index].completed = 'yes';
+  for (const project in projects) {
+    for (const task of projects[project]) {
+      if (task.id === taskCompleted.id) {
+        task.completed = "yes";
+      }
+    }
   }
   saveProjects(projects);
-  console.log(projects);
 }
 
-function addToProjects(task, project) {
-  let projects = getProjects();
+
+function addToProjects (task, project) {
+  projects = getProjects()
   projects[project] = projects[project] ?? [];
   projects[project].push(task);
   saveProjects(projects);
+  console.table(projects);
 }
 
 function getAllTasks() {
@@ -40,37 +53,62 @@ function getAllTasks() {
 }
 
 export function createNewProject(name) {
-  let projects = getProjects();
+  
   if (!projects[name]) {
     projects[name] = [];
-    saveProjects(projects);
   }
 }
 
-const defaults = [
-  { 
-    title: "Walk Dog",
-    description: "He needs to run around",
-    dueDate: "2024-02-10",
-    priority: "High",
-    notes: "His name is Bubba"
-  },
-  {
-    title: "Take a shower",
-    description: "Use new soap",
-    dueDate: "2024-02-15",
-    priority: "Low",
-    notes: "Someone said I smell like shit"
-  },
-  {
-    title: "Learn how to be nice",
-    description: "Nah I'm good",
-    dueDate: new Date().toISOString(),
-    priority: "Medium",
-    notes: "N/A"
+function addDefaultTasks() {
+  const defaultTasks = [
+    {
+      title: 'Default Task 1',
+      description: 'Description of Default Task 1',
+      dueDate: '2024-02-06',
+      priority: 'High',
+      notes: 'Notes for Default Task 1',
+      completed: 'no',
+      project: 'Default Project'
+    },
+    {
+      title: 'Default Task 2',
+      description: 'Description of Default Task 2',
+      dueDate: '2024-02-07',
+      priority: 'Medium',
+      notes: 'Notes for Default Task 2',
+      completed: 'no',
+      project: 'Default Project'
+    },
+    {
+      title: 'Default Task 5',
+      description: 'Description of Default Task 2',
+      dueDate: '2024-02-07',
+      priority: 'Medium',
+      notes: 'Notes for Default Task 2',
+      completed: 'no',
+      project: 'Default Project'
+    },
+    {
+      title: 'Default Task 6',
+      description: 'Description of Default Task 2',
+      dueDate: '2024-02-07',
+      priority: 'Medium',
+      notes: 'Notes for Default Task 2',
+      completed: 'no',
+      project: 'Default Project'
+    }
+  ];
+
+  addToProjects(defaultTasks[0], 'Default Project');
+  addToProjects(defaultTasks[1], 'Default Project');
+}
+
+function initializeDefaults() {
+  if (!localStorage.getItem('defaultsAdded')) {
+    addDefaultTasks();
+    localStorage.setItem('defaultsAdded', 'true');
   }
-];
+}
+initializeDefaults();
 
-saveProjects(defaults);
-
-export { addToProjects, removeTaskFromProjects, getAllTasks, upDateComplete };
+export { addToProjects, getProjects, removeTaskFromProjects, getAllTasks, upDateComplete };

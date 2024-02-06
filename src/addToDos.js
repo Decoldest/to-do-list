@@ -98,6 +98,7 @@ const addButton = (text, clickHandler) => {
 };
 
 const addCompletedButton = (newTask) => addButton('Complete', (e) => {
+  e.currentTarget.parentNode.classList.toggle('pending');
   e.currentTarget.parentNode.classList.toggle('completed');
   upDateComplete(newTask);
 });
@@ -156,8 +157,9 @@ function makeTaskUI (task) {
   
   if (task.completed === 'yes'){
     taskCardContainer.classList.add('completed');
-  } else {
-    taskCardContainer.classList.add('pending');
+  } 
+  else {
+     taskCardContainer.classList.add('pending');
   }
 
   return taskCardContainer;
