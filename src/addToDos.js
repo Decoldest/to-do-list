@@ -111,7 +111,6 @@ const editToDo = (task, e)  => {
   editForm.classList.remove('hidden');
   taskCardContainer.classList.add('hidden');
   taskCardContainer.parentNode.insertBefore(setEditForm(task), taskCardContainer);
-
 }
 
 const setEditForm = (task) => {
@@ -130,7 +129,7 @@ const setEditForm = (task) => {
     e.preventDefault();
     editForm.classList.add('hidden');
     const temp = getTaskData(e.target);
-    console.log(e.currentTarget.nextSibling);
+    console.table(temp);
     e.currentTarget.nextSibling.replaceWith(makeTaskUI(temp));
   })
 
