@@ -1,4 +1,4 @@
-import { addToProjects, removeTaskFromProjects, getAllTasks } from "./projects.js";
+import { addToProjects, removeTaskFromProjects, getAllTasks, upDateComplete } from "./projects.js";
 import { makeToDo } from "./toDos.js";
 import { currentProject, updateCurrentProject } from "./addProject.js";
 import { format, isValid, isThisWeek, parseISO, isToday } from "date-fns";
@@ -45,7 +45,10 @@ function setAddTaskConfirm() {
   });
 }
 
-document.getElementById('modal-cancel').addEventListener('click', toggleTaskForm);
+document.getElementById('modal-cancel').addEventListener('click', function(e) {
+  e.preventDefault();
+  toggleTaskForm();
+});
 
 const resetTaskForm = () => {
   newTaskForm.reset();
@@ -94,8 +97,9 @@ const addButton = (text, clickHandler) => {
   return button;
 };
 
-const addCompletedButton = () => addButton('Complete', (e) => {
+const addCompletedButton = (newTask) => addButton('Complete', (e) => {
   e.currentTarget.parentNode.classList.toggle('completed');
+  upDateComplete(newTask);
 });
 
 const addDeleteButton = (newTask) => addButton('Delete', (e) => {
@@ -138,11 +142,10 @@ const setEditForm = (task) => {
 }
 
 function makeTaskUI (task) {
-  console.log(task.dueDate);
   const taskCardContainer = document.createElement('div');
   taskCardContainer.innerHTML = createTaskCardHTML(task);
 
-  const completedButton = addCompletedButton();
+  const completedButton = addCompletedButton(task);
   taskCardContainer.insertBefore(completedButton, taskCardContainer.children[0]);
 
   const editButton = addEditButton(task, taskCardContainer);
@@ -151,6 +154,12 @@ function makeTaskUI (task) {
   const deleteButton = addDeleteButton(task, taskCardContainer);
   taskCardContainer.appendChild(deleteButton);
   
+  if (task.completed === 'yes'){
+    taskCardContainer.classList.add('completed');
+  } else {
+    taskCardContainer.classList.add('pending');
+  }
+
   return taskCardContainer;
 }
 

@@ -10,13 +10,22 @@ function saveProjects(projects) {
 
 function removeTaskFromProjects(taskToDelete) {
   let projects = getProjects();
-  for (const project in projects) {
-    const index = projects[project].findIndex(i => i.id === taskToDelete.id);
-    if (index !== -1) {
-      projects[project].splice(index, 1);
-    }
+  const index = projects.findIndex(i => i.id === taskToDelete.id);
+  if (index !== -1) {
+    projects.splice(index, 1);
+  }  
+  saveProjects(projects);
+}
+
+function upDateComplete(taskCompleted) {
+  let projects = getProjects();
+
+  const index = projects.findIndex(i => i.id === taskCompleted.id);
+  if (index !== -1) {
+    projects[index].completed = 'yes';
   }
   saveProjects(projects);
+  console.log(projects);
 }
 
 function addToProjects(task, project) {
@@ -56,7 +65,7 @@ const defaults = [
   {
     title: "Learn how to be nice",
     description: "Nah I'm good",
-    dueDate: new Date(),
+    dueDate: new Date().toISOString(),
     priority: "Medium",
     notes: "N/A"
   }
@@ -64,4 +73,4 @@ const defaults = [
 
 saveProjects(defaults);
 
-export { addToProjects, removeTaskFromProjects, getAllTasks };
+export { addToProjects, removeTaskFromProjects, getAllTasks, upDateComplete };

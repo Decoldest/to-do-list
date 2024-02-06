@@ -1,5 +1,6 @@
 :root {
   --completed-color: rgb(214, 251, 185);
+  --pending-color: rgb(185, 185, 185);
 }
 
 * {
@@ -20,10 +21,6 @@
 .main-content {
   grid-column: 2;
   grid-row: 1;
-}
-
-.to-do-container {
-  border: 1px solid salmon;
 }
 
 .to-do-container>div {
@@ -58,7 +55,6 @@
 
 #task-form {
   position: absolute;
-  border: 1px saddlebrown solid;
   background-color: beige;
   width: clamp(200px, 22svw, 30svw)
 }
@@ -102,6 +98,10 @@
 
 .completed {
   background-color:var(--completed-color);
+}
+
+.pending {
+  background-color: var(--pending-color);
 }
 
 .hidden {
