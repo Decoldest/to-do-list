@@ -15,7 +15,6 @@ function removeTaskFromProjects (taskToDelete) {
     console.log(index);
 
     if (index !== -1) {
-      console.log('found');
       projects[project].splice(index, 1);
     }
   }

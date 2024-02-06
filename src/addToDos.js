@@ -1,4 +1,4 @@
-import { addToProjects, getProjects, removeTaskFromProjects, getAllTasks } from "./projects.js";
+import { addToProjects, removeTaskFromProjects, getAllTasks } from "./projects.js";
 import { makeToDo } from "./toDos.js";
 import { currentProject, updateCurrentProject } from "./addProject.js";
 import { format, isValid, isThisWeek, parseISO, isToday } from "date-fns";
@@ -7,6 +7,7 @@ const newToDoButton = document.getElementById('new-to-do');
 const newTaskForm = document.getElementById('task-form');
 const toDoContainer = document.querySelector('.to-do-container');
 const taskButtons = Array.from(document.querySelectorAll('.task-section'));
+const editForm = document.getElementById('edit-form')
 
 let currentFilter = () => true;
 
@@ -63,18 +64,19 @@ const updateTaskDisplay = (currentTaskArray) => {
 
 //Adds only one task
 const addSingleTask = (newTask) => {
+  const temp = makeToDo(
+    newTask.title,
+    newTask.description,
+    newTask.dueDate,
+    newTask.priority,
+    newTask.notes,
+    currentProject,
+  );
   addToProjects(
-    makeToDo(
-      newTask.title,
-      newTask.description,
-      newTask.dueDate,
-      newTask.priority,
-      newTask.notes,
-      currentProject,
-    ),
+    temp,
     currentProject
   );
-  if(currentFilter(newTask)) { appendTask(newTask); }
+  if(currentFilter(temp)) { appendTask(temp); }
 }
 
 const createTaskCardHTML = (newTask) => `
@@ -100,6 +102,34 @@ const addDeleteButton = (newTask) => addButton('Delete', (e) => {
   removeTaskFromProjects(newTask);
 });
 
+const addEditButton = (task, taskCardContainer) => addButton('Edit', (e) => {
+  editToDo(task, e);
+});
+
+const editToDo = (task, e)  => {
+  editForm.classList.toggle('hidden');
+  e.currentTarget.parentNode.replaceWith(setEditForm(task));
+}
+
+const setEditForm = (task) => {
+  
+  populateEditForm(task);
+
+  function populateEditForm (task) {
+    document.getElementById("edit-title").value = task.title;
+    document.getElementById("edit-description").value = task.description;
+    document.getElementById("edit-dueDate").value = task.dueDate;
+    document.getElementById("edit-priority").value = task.priority;
+    document.getElementById("edit-notes").value = task.notes;
+  };
+
+  editForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+  })
+
+  return editForm;
+}
 
 const appendTask = (newTask) => {
   const taskCardContainer = document.createElement('div');
@@ -108,7 +138,10 @@ const appendTask = (newTask) => {
   const completedButton = addCompletedButton();
   taskCardContainer.insertBefore(completedButton, taskCardContainer.children[0]);
 
-  const deleteButton = addDeleteButton(newTask);
+  const editButton = addEditButton(newTask, taskCardContainer);
+  taskCardContainer.appendChild(editButton);
+
+  const deleteButton = addDeleteButton(newTask, taskCardContainer);
   taskCardContainer.appendChild(deleteButton);
 
   toDoContainer.appendChild(taskCardContainer);

@@ -68,7 +68,6 @@ function makeNewProjectButton(name) {
   return newProjectButton;
 }
 
-
 addProjectButton.addEventListener('click', handleAddProjectClick);
 cancelAddProject.addEventListener('click', handleCancelAddProjectClick);
 

@@ -59,7 +59,7 @@
           </p>
           <p>
             <button type="submit" value="submit" id="modal-confirm">Confirm</button>
-            <button value="submit" id="modal-cancel">Cancel</button>
+            <button id="modal-cancel">Cancel</button>
           </p>
         </form>
         <div>
@@ -76,6 +76,43 @@
         </div>
       </div>
     </div>
+    <form id="edit-form" class="hidden">
+      <p>
+        <input
+          type="text"
+          name="edit-title"
+          id="edit-title"
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          name="edit-description"
+          id="edit-description"
+        />
+      </p>
+      <p>
+        <input type="date" name="edit-dueDate" id="edit-dueDate" />
+      </p>
+      <label for="edit-priority">Priority:</label>
+      <select id="edit-priority" name="edit-priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="critical">Critical</option>
+      </select>
+      <p>
+        <textarea
+          id="edit-notes"
+          name="edit-notes"
+          rows="5"
+          cols="20"
+        ></textarea>
+      </p>
+      <p>
+        <button type="submit" id="edit-confirm">Confirm</button>
+      </p>
+    </form>
     <script src="main.js"></script>
   </body>
 </html>

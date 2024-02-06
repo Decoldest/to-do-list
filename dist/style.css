@@ -91,3 +91,7 @@ span {
 .completed {
   background-color:var(--completed-color);
 }
+
+.hidden {
+  display: none;
+}
