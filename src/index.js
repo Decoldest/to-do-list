@@ -6,5 +6,6 @@ window.addEventListener('load', () => {
   setNewToDoListener();
   setNewProjectListener();
   document.getElementById('all').click();
+  document.getElementById('all').focus();
 });
 

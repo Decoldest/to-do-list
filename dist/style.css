@@ -3,8 +3,9 @@
   --pending-color: rgb(243, 243, 243);
   --border-color: rgb(209, 207, 207);
   --button-default-color: rgb(207, 235, 240);
-  --to-do-btn-color: rgb(185, 219, 176);
+  --to-do-btn-color: rgb(142, 206, 124);
   --task-form-background: rgb(240, 240, 224);
+  --focusable-color: rgb(240, 133, 133);
 }
 
 * {
@@ -177,9 +178,7 @@
   background-color: var(--button-default-color);
   cursor: pointer; 
 }
-.sidebar button:hover {
-  background-color: #d4d4d4;
-}
+
 #new-to-do {
   background-color: var(--to-do-btn-color);
 }
@@ -192,4 +191,8 @@
 #task-form.show {
   opacity: 1; /* Highlight: Show when active */
   visibility: visible; /* Highlight: Show when active */
+}
+
+.focusable:focus {
+  background-color: var(--focusable-color);
 }
