@@ -62,6 +62,10 @@
   flex: 1;
 }
 
+.to-do-container>div.hidden {
+  padding: 0;
+}
+
 .projects-container, .task-container {
   display: flex;
   flex-direction: column;
