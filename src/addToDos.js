@@ -113,6 +113,7 @@ const addEditButton = (task) => addButton('Edit', (e) => {
 });
 
 const editToDo = (task, e)  => {
+  if (!editForm.classList.contains('hidden')) return;
   let taskCardContainer = e.currentTarget.parentNode;
   editForm.classList.remove('hidden');
   taskCardContainer.classList.add('hidden');
@@ -125,10 +126,10 @@ const setEditForm = (task) => {
 
   function populateEditForm (task) {
     document.getElementById("edit-title").value = task.title;
-    document.getElementById("edit-description").value = task.description;
+    document.getElementById("edit-description").value = task.description || "Description...";
     document.getElementById("edit-dueDate").value = task.dueDate;
-    document.getElementById("edit-priority").value = task.priority;
-    document.getElementById("edit-notes").value = task.notes;
+    document.getElementById("edit-priority").value = task.priority || "Priority";
+    document.getElementById("edit-notes").value = task.notes || "Notes";
   };
 
   editForm.addEventListener("submit", (e) => {

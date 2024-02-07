@@ -21,9 +21,10 @@
 }
 
 .sidebar {
+  margin-top: 5svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   grid-column: 1 / 2;
   grid-row: 1;
@@ -69,7 +70,7 @@
 
 #task-form {
   position: absolute;
-  top: 10%;
+  top: 10svh;
   background-color: var(--task-form-background);
   width: clamp(200px, 22svw, 30svw);
   margin: 0 auto;
@@ -171,6 +172,15 @@
   background-color: #f4f4f4;
 }
 
+#edit-form .hidden {
+  padding: 0;
+  border: black 2px solid;
+}
+
+#edit-form > *{
+  margin: 0;
+}
+
 #edit-form input[type="text"],
 #edit-form input[type="date"],
 #edit-form select,
@@ -211,6 +221,7 @@
   visibility: hidden;
   opacity: 0;
   height: 0px;
+  padding: 0;
 }
 
 .sidebar button {
