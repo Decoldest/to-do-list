@@ -64,6 +64,7 @@ export function createNewProject(name) {
 function addDefaultTasks() {
   const defaultTasks = [
     {
+      id: '0',
       title: 'Walk Dog',
       description: 'He needs three walks a day',
       dueDate: '2024-02-06',
@@ -73,6 +74,7 @@ function addDefaultTasks() {
       project: 'Default Project'
     },
     {
+      id: '1',
       title: 'Make lasagna',
       description: 'Garfield wants lasagna',
       dueDate: '2024-02-07',

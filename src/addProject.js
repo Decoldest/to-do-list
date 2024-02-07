@@ -44,13 +44,13 @@ const createButton = (name) => {
   let newButton = document.createElement('button');
   newButton.textContent = name;
   newButton.id = name;
+  newButton.classList.add('focusable');
   return newButton;
 }
 
 const projectBarListener = (button) => {
   button.addEventListener('click', () => {
     updateCurrentProject(button.id);
-    console.log(currentProject);
     filterDisplay(currentProject);
     displayCategory.textContent = button.id.toUpperCase();
   });
