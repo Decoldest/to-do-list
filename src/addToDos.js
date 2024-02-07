@@ -28,7 +28,6 @@ const setNewToDoListener = () => {
 
 function getTaskData(form) {
   const newTask = Object.fromEntries(new FormData(form));
-  //newTask.dueDate = newTask.dueDate;
   return newTask;
 }
 
@@ -112,23 +111,24 @@ const addEditButton = (task) => addButton('Edit', (e) => {
   editToDo(task, e);
 });
 
-const editToDo = (task, e)  => {
+const editToDo = (task, e) => {
   if (!editForm.classList.contains('hidden')) return;
   let taskCardContainer = e.currentTarget.parentNode;
   editForm.classList.remove('hidden');
   taskCardContainer.classList.add('hidden');
-  taskCardContainer.parentNode.insertBefore(setEditForm(task), taskCardContainer);
+  let completed = taskCardContainer.classList.contains('completed') ? 'yes' : 'no'; 
+  
+  taskCardContainer.parentNode.insertBefore(setEditForm(task, completed), taskCardContainer);
 }
 
-const setEditForm = (task) => {
-  
+const setEditForm = (task, completed) => {
   populateEditForm(task);
 
-  function populateEditForm (task) {
+  function populateEditForm(task) {
     document.getElementById("edit-title").value = task.title;
     document.getElementById("edit-description").value = task.description || "Description...";
     document.getElementById("edit-dueDate").value = task.dueDate;
-    document.getElementById("edit-priority").value = task.priority || "Priority";
+    document.getElementById("edit-priority").value = task.priority || "Low";
     document.getElementById("edit-notes").value = task.notes || "Notes";
   };
 
@@ -136,9 +136,11 @@ const setEditForm = (task) => {
     e.preventDefault();
     editForm.classList.add('hidden');
     const temp = getTaskData(e.target);
-    console.table(temp);
+    if (completed === 'yes') {
+      temp.completed = 'yes';
+    }
     e.currentTarget.nextSibling.replaceWith(makeTaskUI(temp));
-  })
+  });
 
   return editForm;
 }
@@ -158,9 +160,8 @@ function makeTaskUI (task) {
   
   if (task.completed === 'yes'){
     taskCardContainer.classList.add('completed');
-  } 
-  else {
-     taskCardContainer.classList.add('pending');
+  } else {
+    taskCardContainer.classList.add('pending');
   }
 
   return taskCardContainer;

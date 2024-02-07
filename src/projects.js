@@ -68,7 +68,7 @@ function addDefaultTasks() {
       title: 'Walk Dog',
       description: 'He needs three walks a day',
       dueDate: '2024-02-06',
-      priority: 'High',
+      priority: 'low',
       notes: 'His name is Bubba',
       completed: 'no',
       project: 'Default Project'
@@ -78,7 +78,7 @@ function addDefaultTasks() {
       title: 'Make lasagna',
       description: 'Garfield wants lasagna',
       dueDate: '2024-02-07',
-      priority: 'Medium',
+      priority: 'low',
       notes: 'Don\'t give him too much or he\'ll get fat',
       completed: 'no',
       project: 'Default Project'

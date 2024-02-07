@@ -172,9 +172,9 @@
   background-color: #f4f4f4;
 }
 
-#edit-form .hidden {
+#edit-form.hidden, .pending.hidden {
   padding: 0;
-  border: black 2px solid;
+  border: none;
 }
 
 #edit-form > *{
